@@ -1,7 +1,12 @@
 import React from 'react';
+import { useState } from 'react';
+import ColorfulMessage from './components/ColorfulMessage';
 
 const App = () => {
-  const onClickButton = () => alert("ボタンが押されました。");
+  const onClickCountUp = () => {
+    setNum(num+1);
+  };
+  const [num, setNum] = useState(1);
   const contentStyle = {
     color:"blue",
     fontSize:"18px"
@@ -9,11 +14,13 @@ const App = () => {
   return (
   <>
     <h1 style={contentStyle}>こんにちは！</h1>
-    <p>お元気ですか??</p>
-    <button onClick={onClickButton}>ボタン</button>
+    <ColorfulMessage color="blue">お元気ですか？</ColorfulMessage>
+    <ColorfulMessage color="red">genki</ColorfulMessage>
+    <button onClick={onClickCountUp}>ボタン</button>
+    <p>{num}</p>
   </>
   
   );
 }
 export default App;
-// 42から
+// 47から
