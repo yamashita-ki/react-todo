@@ -1,40 +1,42 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import {ColorfulMessage} from './components/ColorfulMessage';
+import React, { useState } from 'react';
+import "./style.css";
+export const App = () => {
 
-const App = () => {
-  const onClickCountUp = () => {
-    setNum(num+1);
-  };
-  const [num, setNum] = useState(1);
-  const [faceShowFlag, setFaceShowFlag] = useState(true);
-  const contentStyle = {
-    color:"blue",
-    fontSize:"18px"
-  }
-  const onClickSwitchShowFlag = () => {
-    setFaceShowFlag(!faceShowFlag);
-  };
-  useEffect(() =>{
-    if(num % 3 === 0){
-      faceShowFlag || setFaceShowFlag(true);
-    }else{
-      faceShowFlag && setFaceShowFlag(false);
-    }
-  },[num]);
-
+  const [incompleteTodos, setInCompleteTodos] = useState(["あああ", "いいい"]);
+  const [completeTodos, setCompleteTodos] = useState(["ううう"])
   return (
-  <>
-    <h1 style={contentStyle}>こんにちは！</h1>
-    <ColorfulMessage color="blue">お元気ですか？</ColorfulMessage>
-    <ColorfulMessage color="red">genki</ColorfulMessage>
-    <button onClick={onClickCountUp}>ボタン</button>
-    <button onClick={onClickSwitchShowFlag}>on/off</button>
-    <p>{num}</p>
-    {faceShowFlag &&  <p>( ..)φメモメモ</p>}
-  </>
-  
+    <>
+      <div className='input-area'>
+        <input placeholder='TODOを追加'></input>
+        <button>追加</button>
+      </div>
+      <div className='incomplete-area'>
+        <p className='title'>未完了のTODO</p>
+        <ul>
+          {incompleteTodos.map((todo) => {
+            return (
+              <div key={todo} className='list-row'>
+                <li>{todo}</li>
+                <button>完了</button>
+                <button>削除</button>
+              </div>
+            )
+          })}
+        </ul>
+      </div>
+      <div className='complete-area'>
+        <p className='title'>完了のTODO</p>
+        <ul>
+          {completeTodos.map((todo) => {
+            return (
+              <div key={todo} className='list-row'>
+                <li>{todo}</li>
+                <button>戻す</button>
+              </div>
+            )
+          })}
+        </ul>
+      </div>
+    </>
   );
 }
-export default App;
-// 47から
